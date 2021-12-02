@@ -4,6 +4,11 @@ import mymodul as md
 
 source_list = ow.sourcepaths()
 
+
+# Önizleme göster
+view = False
+# boyutu küçült, halihazır 50/100 lakin fonk. 20/100 ile çağrıldı, video çok büyük.
+resize = True
 for video in source_list:
     
     cap = cv2.VideoCapture(video)
@@ -20,20 +25,24 @@ for video in source_list:
 
                     end, img= cap.read()
                     if end == False:
-                        print("Next...")
                         print(video)
                         print(source_list[len(source_list)-1])
                         if video == source_list[len(source_list)-1]:
                             cv2.putText(Limg,"Finish. press 'q' for exit.",(10,30),cv2.FONT_ITALIC,1,(255,0,0),2)
-                            cv2.destroyWindow(winname)
+                            if view:
+                                cv2.destroyWindow(winname)
                             md.cshow("Done!", cv2.cvtColor(Limg, cv2.COLOR_BGR2RGB))
                             print("Finis")
                             print("çıkmak  için 'q' ye basın.")
                             md.cwait()
-
+                        else:
+                            print("Next...")
                         break
-                    md.cshow(winname, cv2.cvtColor(img, cv2.COLOR_BGR2RGB))
-                    md.cwait(1)
+                    if resize:
+                        img = cv2.resize(img,md.reshape(img,20)) # özel değer,  video çook büyük olduğu için 20, standart 50
+                    if view:
+                        md.cshow(winname, cv2.cvtColor(img, cv2.COLOR_BGR2RGB))
+                        md.cwait(1)
                     cv2.imwrite("{}\\img{}.jpg".format(folder,numofimg),img)
                     print("image {}".format(numofimg))
                     numofimg+=1

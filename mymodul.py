@@ -43,3 +43,13 @@ def cwait(*args):
     k= cv2.waitKey(key)
     if k == 0xFF & ord("q"):
         cv2.destroyAllWindows()
+
+def reshape(img, *args):
+    scale_percent = 50
+    if args:
+        scale_percent = args[0]
+    width = int(img.shape[1]*scale_percent/100)
+    height = int(img.shape[0]*scale_percent/100)
+    return width,height
+
+    
