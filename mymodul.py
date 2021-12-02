@@ -8,8 +8,8 @@ def filepath(file, *args):
     if args:
         fex = args[0]
     else:
-        fex = "jpg"
-    fileway = ("{}\\data\\{}.{}" .format(prt1,file,fex))
+        fex = ".jpg"
+    fileway = ("{}\\data\\{}{}" .format(prt1,file,fex))
     return fileway
 
 def cshow(name,pic):
