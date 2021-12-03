@@ -9,6 +9,10 @@ source_list = ow.sourcepaths()
 view = False
 # boyutu küçült, halihazır 50/100 lakin fonk. 20/100 ile çağrıldı, video çok büyük.
 resize = True
+# her x karede 1 alınacak kare
+circ = 5 # x = circ
+
+
 for video in source_list:
     
     cap = cv2.VideoCapture(video)
@@ -43,7 +47,8 @@ for video in source_list:
                     if view:
                         md.cshow(winname, cv2.cvtColor(img, cv2.COLOR_BGR2RGB))
                         md.cwait(1)
-                    cv2.imwrite("{}\\img{}.jpg".format(folder,numofimg),img)
+                    if numofimg % circ == 0:
+                        cv2.imwrite("{}\\img{}.jpg".format(folder,numofimg),img)
                     print("image {}".format(numofimg))
                     numofimg+=1
                     Limg=img
